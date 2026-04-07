@@ -553,6 +553,10 @@ body {
   Pick 8 golfers across 5 tiers &bull; Best 4 of 8 finishing positions &bull; Lowest score wins
 </div>
 
+<div class="pool-meta" id="countdownBar" style="background: var(--masters-deeper); color: var(--gold-light); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.06em; border-bottom: 1px solid rgba(200,169,81,0.2);">
+  <span id="countdownText"></span>
+</div>
+
 <div class="deadline-banner" id="deadlineBanner">
   Submissions are closed — the tournament has started! <a href="leaderboard.html" style="color: var(--gold-light); text-decoration: underline;">View the Leaderboard</a>
 </div>
@@ -663,89 +667,91 @@ const TIERS = [
   {
     name: "Tier 1 — Favorites", tier: 1, picks: 1,
     players: [
-      { name: "Scottie Scheffler", odds: "+500" },
-      { name: "Jon Rahm", odds: "+950" },
-      { name: "Bryson DeChambeau", odds: "+1000" },
-      { name: "Ludvig Åberg", odds: "+1100" },
-      { name: "Rory McIlroy", odds: "+1200" },
-      { name: "Xander Schauffele", odds: "+1600" }
+      { name: "Scottie Scheffler", odds: "+495" },
+      { name: "Jon Rahm", odds: "+910" },
+      { name: "Bryson DeChambeau", odds: "+1050" },
+      { name: "Rory McIlroy", odds: "+1175" },
+      { name: "Ludvig Aberg", odds: "+1650" },
+      { name: "Xander Schauffele", odds: "+1800" }
     ]
   },
   {
     name: "Tier 2 — Contenders", tier: 2, picks: 2,
     players: [
-      { name: "Matt Fitzpatrick", odds: "+2000" },
-      { name: "Tommy Fleetwood", odds: "+2200" },
-      { name: "Collin Morikawa", odds: "+2200" },
-      { name: "Brooks Koepka", odds: "+2500" },
-      { name: "Hideki Matsuyama", odds: "+2800" },
-      { name: "Akshay Bhatia", odds: "+4300" },
-      { name: "Chris Gotterup", odds: "+4300" },
-      { name: "Justin Thomas", odds: "+4500" },
-      { name: "Cameron Young", odds: "+4500" },
-      { name: "Shane Lowry", odds: "+4500" },
-      { name: "Jordan Spieth", odds: "+4500" },
-      { name: "Robert MacIntyre", odds: "+4500" }
+      { name: "Tommy Fleetwood", odds: "+2250" },
+      { name: "Cameron Young", odds: "+2300" },
+      { name: "Matt Fitzpatrick", odds: "+2350" },
+      { name: "Hideki Matsuyama", odds: "+2700" },
+      { name: "Collin Morikawa", odds: "+3100" },
+      { name: "Min Woo Lee", odds: "+3400" },
+      { name: "Justin Rose", odds: "+3500" },
+      { name: "Robert MacIntyre", odds: "+3500" },
+      { name: "Brooks Koepka", odds: "+3700" },
+      { name: "Jordan Spieth", odds: "+4200" },
+      { name: "Patrick Reed", odds: "+4300" },
+      { name: "Chris Gotterup", odds: "+4300" }
     ]
   },
   {
     name: "Tier 3 — Mid-Range", tier: 3, picks: 2,
     players: [
       { name: "Viktor Hovland", odds: "+4500" },
-      { name: "Wyndham Clark", odds: "+5000" },
-      { name: "Patrick Cantlay", odds: "+5700" },
-      { name: "Patrick Reed", odds: "+5500" },
-      { name: "Min Woo Lee", odds: "+5500" },
-      { name: "Nicolai Højgaard", odds: "+5500" },
-      { name: "Adam Scott", odds: "+6500" },
-      { name: "Justin Rose", odds: "+6500" },
-      { name: "Tyrrell Hatton", odds: "+6800" },
-      { name: "Corey Conners", odds: "+6800" },
-      { name: "Sahith Theegala", odds: "+6800" },
-      { name: "Sam Burns", odds: "+7000" },
-      { name: "Sungjae Im", odds: "+7000" },
-      { name: "Tom Kim", odds: "+7000" }
+      { name: "Russell Henley", odds: "+4700" },
+      { name: "Si Woo Kim", odds: "+5000" },
+      { name: "Justin Thomas", odds: "+5400" },
+      { name: "Akshay Bhatia", odds: "+5600" },
+      { name: "Patrick Cantlay", odds: "+5800" },
+      { name: "Adam Scott", odds: "+6000" },
+      { name: "Jake Knapp", odds: "+6500" },
+      { name: "Shane Lowry", odds: "+6700" },
+      { name: "Jason Day", odds: "+6800" },
+      { name: "J.J. Spaun", odds: "+6900" },
+      { name: "Sam Burns", odds: "+7200" },
+      { name: "Nicolai Hojgaard", odds: "+7400" },
+      { name: "Sepp Straka", odds: "+7800" },
+      { name: "Maverick McNealy", odds: "+7800" }
     ]
   },
   {
     name: "Tier 4 — Sleepers", tier: 4, picks: 2,
     players: [
-      { name: "Sepp Straka", odds: "+7500" },
-      { name: "Tony Finau", odds: "+7500" },
-      { name: "Russell Henley", odds: "+8000" },
-      { name: "Jacob Bridgeman", odds: "+8600" },
-      { name: "Gary Woodland", odds: "+8500" },
-      { name: "Keegan Bradley", odds: "+8000" },
-      { name: "Jason Day", odds: "+8500" },
-      { name: "Rasmus Højgaard", odds: "+8500" },
-      { name: "Daniel Berger", odds: "+8000" },
-      { name: "Ryan Fox", odds: "+9000" },
-      { name: "Casey Jarvis", odds: "+9600" },
-      { name: "Cameron Smith", odds: "+8000" },
-      { name: "Denny McCarthy", odds: "+8000" },
-      { name: "J.J. Spaun", odds: "+9000" },
-      { name: "Jake Knapp", odds: "+6900" }
+      { name: "Tyrrell Hatton", odds: "+8200" },
+      { name: "Jacob Bridgeman", odds: "+8400" },
+      { name: "Corey Conners", odds: "+8400" },
+      { name: "Kurt Kitayama", odds: "+9400" },
+      { name: "Harris English", odds: "+10000" },
+      { name: "Ben Griffin", odds: "+11000" },
+      { name: "Cameron Smith", odds: "+11000" },
+      { name: "Sungjae Im", odds: "+11500" },
+      { name: "Rasmus Hojgaard", odds: "+12000" },
+      { name: "Gary Woodland", odds: "+12000" },
+      { name: "Max Homa", odds: "+12000" },
+      { name: "Daniel Berger", odds: "+12000" },
+      { name: "Keegan Bradley", odds: "+14000" },
+      { name: "Marco Penge", odds: "+14500" }
     ]
   },
   {
     name: "Tier 5 — Longshots", tier: 5, picks: 1,
     players: [
-      { name: "Nick Taylor", odds: "+12000" },
-      { name: "Kurt Kitayama", odds: "+12000" },
-      { name: "Ben Griffin", odds: "+15000" },
-      { name: "Harry Hall", odds: "+13000" },
-      { name: "Ryan Gerard", odds: "+13000" },
-      { name: "Sam Stevens", odds: "+15000" },
-      { name: "Haotong Li", odds: "+15000" },
-      { name: "Chris Kirk", odds: "+15000" },
-      { name: "Kristoffer Reitan", odds: "+25000" },
-      { name: "Carlos Ortiz", odds: "+18000" },
-      { name: "Davis Thompson", odds: "+10000" },
-      { name: "Lucas Glover", odds: "+20000" },
-      { name: "Fred Couples", odds: "+100000" },
-      { name: "Jose Maria Olazabal", odds: "+100000" },
-      { name: "Bubba Watson", odds: "+100000" },
-      { name: "Vijay Singh", odds: "+100000" }
+      { name: "Harry Hall", odds: "+15500" },
+      { name: "Ryan Gerard", odds: "+15500" },
+      { name: "Alex Noren", odds: "+16000" },
+      { name: "Sam Stevens", odds: "+17500" },
+      { name: "Nick Taylor", odds: "+19000" },
+      { name: "Ryan Fox", odds: "+20000" },
+      { name: "Wyndham Clark", odds: "+20000" },
+      { name: "Brian Harman", odds: "+22000" },
+      { name: "Kristoffer Reitan", odds: "+22500" },
+      { name: "Casey Jarvis", odds: "+23000" },
+      { name: "Carlos Ortiz", odds: "+23000" },
+      { name: "Sergio Garcia", odds: "+25000" },
+      { name: "Dustin Johnson", odds: "+25000" },
+      { name: "Haotong Li", odds: "+27500" },
+      { name: "Bubba Watson", odds: "+52500" },
+      { name: "Fred Couples", odds: "+500000" },
+      { name: "Jose Maria Olazabal", odds: "+500000" },
+      { name: "Vijay Singh", odds: "+500000" }
     ]
   }
 ];
@@ -993,6 +999,35 @@ function showMsg(el, msg, type) {
 function showLoading(show) {
   document.getElementById('loadingOverlay').classList.toggle('visible', show);
 }
+
+// ============================================================
+// Countdown Timer
+// ============================================================
+function updateCountdown() {
+  const now = new Date();
+  const diff = DEADLINE - now;
+  const el = document.getElementById('countdownText');
+  const bar = document.getElementById('countdownBar');
+
+  if (diff <= 0) {
+    bar.style.display = 'none';
+    return;
+  }
+
+  const days = Math.floor(diff / 86400000);
+  const hrs = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+
+  let text = 'Picks lock in ';
+  if (days > 0) text += `${days}d ${hrs}h ${mins}m ${secs}s`;
+  else if (hrs > 0) text += `${hrs}h ${mins}m ${secs}s`;
+  else text += `${mins}m ${secs}s`;
+
+  el.textContent = text;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
 // ============================================================
 // Init

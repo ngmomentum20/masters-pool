@@ -38,7 +38,7 @@ body {
 /* ========== HEADER ========== */
 .header {
   background: linear-gradient(170deg, var(--masters-darkest) 0%, var(--masters-deeper) 40%, var(--masters-dark) 100%);
-  padding: 2rem 2rem 1.5rem;
+  padding: 1.75rem 2rem 1.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -53,33 +53,15 @@ body {
     radial-gradient(ellipse at 80% 50%, rgba(200,169,81,0.06) 0%, transparent 50%),
     repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,255,255,0.008) 60px, rgba(255,255,255,0.008) 120px);
 }
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 3px;
-  background: var(--gold);
-  box-shadow: 0 0 20px rgba(200,169,81,0.4);
-}
-.header-content { position: relative; z-index: 1; }
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.header-content {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
 }
-.header-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
 .header h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   font-weight: 900;
   color: var(--gold);
   letter-spacing: 0.06em;
@@ -107,11 +89,13 @@ body {
   color: var(--gold-light);
   letter-spacing: 0.08em;
 }
+.header-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
 .nav-link {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
   color: var(--gold-light);
   font-size: 0.78rem;
   text-decoration: none;
@@ -122,6 +106,7 @@ body {
   white-space: nowrap;
 }
 .nav-link:hover { background: rgba(200,169,81,0.15); }
+.nav-link.active { background: rgba(200,169,81,0.2); border-color: var(--gold); }
 
 /* ========== STATUS BAR ========== */
 .status-bar {
@@ -161,6 +146,65 @@ body {
   50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(74,222,128,0); }
 }
 
+/* ========== TV MODE BAR ========== */
+.tv-bar {
+  background: rgba(0,0,0,0.3);
+  padding: 0.4rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(200,169,81,0.08);
+}
+.tv-btn {
+  background: none;
+  border: 1px solid rgba(200,169,81,0.3);
+  color: var(--gold-light);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tv-btn:hover, .tv-btn.active { background: rgba(200,169,81,0.2); border-color: var(--gold); }
+.tv-btn .icon { margin-right: 0.3rem; }
+
+/* ========== POOL STATS BAR ========== */
+.stats-bar {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,169,81,0.12);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+.stat-label {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.stat-detail {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 0.15rem;
+}
+
 /* ========== PRE-TOURNAMENT MESSAGE ========== */
 .pre-tournament {
   max-width: 600px;
@@ -181,9 +225,7 @@ body {
   font-size: 1.6rem;
   color: var(--gold);
 }
-.pre-tournament .pt-body {
-  padding: 2rem;
-}
+.pre-tournament .pt-body { padding: 2rem; }
 .pre-tournament .countdown {
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
@@ -222,7 +264,8 @@ body {
   background: linear-gradient(135deg, var(--masters-darkest) 0%, var(--masters-deeper) 30%, var(--masters-dark) 60%, var(--masters-deeper) 100%);
   border: 2px solid var(--gold);
   border-radius: 16px;
-  margin: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 1100px;
   padding: 2.5rem 2rem;
   text-align: center;
   position: relative;
@@ -239,10 +282,7 @@ body {
     radial-gradient(ellipse at 50% 100%, rgba(200,169,81,0.08) 0%, transparent 60%);
 }
 .champion-content { position: relative; z-index: 1; }
-.champion-jacket {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
+.champion-jacket { font-size: 3rem; margin-bottom: 0.5rem; }
 .champion-label {
   font-family: 'Playfair Display', serif;
   font-size: 0.85rem;
@@ -282,13 +322,13 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   border: 1px solid rgba(0,100,71,0.08);
   transition: all 0.3s ease;
 }
 .leaderboard-card:hover {
   box-shadow: var(--shadow-xl);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 .leaderboard-card.rank-1 {
   border: 2px solid var(--gold);
@@ -301,21 +341,22 @@ body {
 .card-header {
   display: flex;
   align-items: center;
-  padding: 1rem 1.25rem;
-  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  gap: 0.75rem;
   cursor: pointer;
   transition: background 0.2s;
 }
 .card-header:hover { background: #FAFDF7; }
+
 .rank-badge {
-  width: 42px; height: 42px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Playfair Display', serif;
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   flex-shrink: 0;
 }
 .rank-1 .rank-badge {
@@ -323,45 +364,54 @@ body {
   color: var(--masters-deeper);
   box-shadow: 0 2px 8px rgba(200,169,81,0.4);
 }
-.rank-2 .rank-badge {
-  background: linear-gradient(135deg, #C0C0C0, #8A8A8A);
-  color: var(--white);
-}
-.rank-3 .rank-badge {
-  background: linear-gradient(135deg, #CD7F32, #A0622A);
-  color: var(--white);
-}
-.rank-badge.default {
-  background: var(--cream-dark);
-  color: var(--text-light);
-}
+.rank-2 .rank-badge { background: linear-gradient(135deg, #C0C0C0, #8A8A8A); color: var(--white); }
+.rank-3 .rank-badge { background: linear-gradient(135deg, #CD7F32, #A0622A); color: var(--white); }
+.rank-badge.default { background: var(--cream-dark); color: var(--text-light); }
+
+.card-name-area { flex: 1; }
 .card-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--masters-dark);
-  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
-.card-score {
-  text-align: right;
+.movement-arrow {
+  font-size: 0.7rem;
+  font-weight: 700;
 }
+.movement-arrow.up { color: #22C55E; }
+.movement-arrow.down { color: var(--red); }
+.movement-arrow.same { color: #999; font-size: 0.5rem; }
+
+.card-subtitle {
+  font-size: 0.68rem;
+  color: var(--text-light);
+  margin-top: 0.1rem;
+}
+
+.card-score { text-align: right; }
 .card-score .total {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: var(--masters-dark);
   line-height: 1;
 }
 .card-score .label {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: var(--text-light);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+
 .expand-icon {
   color: var(--text-light);
   font-size: 0.8rem;
   transition: transform 0.3s;
+  flex-shrink: 0;
 }
 .leaderboard-card.expanded .expand-icon { transform: rotate(180deg); }
 
@@ -372,28 +422,20 @@ body {
 }
 .leaderboard-card.expanded .card-body { display: block; }
 
-.golfer-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
 .golfer-row {
   display: flex;
   align-items: center;
-  padding: 0.6rem 1.25rem;
-  gap: 0.75rem;
+  padding: 0.55rem 1.25rem;
+  gap: 0.6rem;
   border-bottom: 1px solid #F0F4EC;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   transition: background 0.15s;
 }
+.golfer-row:last-child { border-bottom: none; }
 .golfer-row:hover { background: #FAFDF7; }
-.golfer-row.counting {
-  background: #F0F8EC;
-  font-weight: 600;
-}
-.golfer-row.not-counting {
-  opacity: 0.5;
-}
+.golfer-row.counting { background: #F0F8EC; font-weight: 600; }
+.golfer-row.not-counting { opacity: 0.45; }
+
 .golfer-tier-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
@@ -405,43 +447,42 @@ body {
 .golfer-tier-dot.t4 { background: #D4915E; }
 .golfer-tier-dot.t5 { background: #9B8EC0; }
 
-.golfer-name { flex: 1; }
+.golfer-name { flex: 1; min-width: 0; }
 .golfer-position {
   font-weight: 700;
   color: var(--masters-dark);
-  min-width: 40px;
+  min-width: 36px;
   text-align: center;
 }
-.golfer-score-today {
-  font-size: 0.75rem;
+.golfer-score-detail {
+  font-size: 0.72rem;
   color: var(--text-light);
-  min-width: 70px;
+  min-width: 80px;
   text-align: right;
 }
 .golfer-pts {
   font-weight: 700;
-  min-width: 40px;
+  min-width: 45px;
   text-align: right;
 }
 .golfer-pts.counting-pts { color: var(--masters-green); }
 .golfer-pts.not-counting-pts { color: #B0B0B0; }
-
-.golfer-mc { color: var(--red); font-weight: 700; }
-.golfer-wd { color: #999; font-weight: 700; }
+.golfer-mc { color: var(--red); }
+.golfer-wd { color: #999; }
 
 /* Tiebreaker footer */
 .card-tiebreakers {
   background: var(--cream);
-  padding: 0.6rem 1.25rem;
-  font-size: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.72rem;
   color: var(--text-light);
   border-top: 1px solid #E0E8D8;
 }
 
 /* ========== SCORING KEY ========== */
 .scoring-key {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(200,169,81,0.15);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,169,81,0.12);
   border-radius: 12px;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
@@ -459,12 +500,8 @@ body {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.5);
 }
-.scoring-key-grid span {
-  white-space: nowrap;
-}
-.scoring-key-grid strong {
-  color: var(--gold-light);
-}
+.scoring-key-grid span { white-space: nowrap; }
+.scoring-key-grid strong { color: var(--gold-light); }
 
 /* ========== FOOTER ========== */
 .footer {
@@ -500,15 +537,31 @@ body {
   z-index: 100;
 }
 
+/* ========== AUTO-SCROLL INDICATOR ========== */
+.auto-scroll-indicator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(200,169,81,0.9);
+  color: var(--masters-deeper);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  z-index: 50;
+  display: none;
+  letter-spacing: 0.06em;
+}
+.auto-scroll-indicator.visible { display: block; }
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .header h1 { font-size: 1.8rem; }
-  .golfer-grid { grid-template-columns: 1fr; }
-  .leaderboard-container { padding: 1rem; }
-  .status-bar { gap: 1rem; padding: 0.5rem 1rem; }
-  .nav-link { position: static; transform: none; display: inline-block; margin-top: 0.5rem; }
-  .header-top { flex-direction: column; }
+  .leaderboard-container { padding: 0.75rem; }
+  .status-bar { gap: 0.75rem; padding: 0.5rem 1rem; }
   .champion-name { font-size: 1.6rem; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 0 0.75rem; }
+  .golfer-score-detail { display: none; }
 }
 </style>
 </head>
@@ -517,18 +570,16 @@ body {
 <!-- Header -->
 <div class="header">
   <div class="header-content">
-    <div class="header-top">
+    <h1>The Masters Pool</h1>
+    <div class="subtitle">Leaderboard</div>
+    <div class="event-badge">
+      <span>Augusta National</span>
+      <span>&bull;</span>
+      <span>April 9 – 12, 2026</span>
+    </div>
+    <div class="header-nav">
       <a href="index.html" class="nav-link">&larr; Make Picks</a>
-      <div class="header-logo">
-        <h1>The Masters Pool</h1>
-        <div class="subtitle">Leaderboard</div>
-        <div class="event-badge">
-          <span>Augusta National</span>
-          <span>&bull;</span>
-          <span>April 9 – 12, 2026</span>
-        </div>
-      </div>
-      <div style="width: 100px;"></div>
+      <button class="nav-link" onclick="refresh()" style="background:none; cursor:pointer;">Refresh Scores</button>
     </div>
   </div>
 </div>
@@ -540,7 +591,16 @@ body {
   <div class="status-item" id="statusEntries"></div>
 </div>
 
-<!-- Champion Banner (shown when tournament complete) -->
+<!-- TV Mode Controls -->
+<div class="tv-bar">
+  <button class="tv-btn" onclick="toggleAutoScroll()" id="btnAutoScroll"><span class="icon">&#9654;</span> TV Auto-Scroll</button>
+  <button class="tv-btn" onclick="expandAll()"><span class="icon">&#9776;</span> Expand All</button>
+  <button class="tv-btn" onclick="collapseAll()"><span class="icon">&#8212;</span> Collapse All</button>
+</div>
+
+<div class="auto-scroll-indicator" id="scrollIndicator">AUTO-SCROLL ON</div>
+
+<!-- Champion Banner -->
 <div class="champion-banner" id="championBanner">
   <div class="champion-content">
     <div class="champion-jacket">&#127941;</div>
@@ -550,6 +610,9 @@ body {
     <div class="champion-subtitle">Congratulations on earning the Green Jacket!</div>
   </div>
 </div>
+
+<!-- Pool Stats -->
+<div class="stats-bar" id="statsBar" style="display:none;"></div>
 
 <!-- Pre-tournament waiting screen -->
 <div id="preTournament" style="display:none;">
@@ -575,12 +638,12 @@ body {
       <span>Win: <strong>1</strong></span>
       <span>2nd: <strong>2</strong></span>
       <span>3rd: <strong>3</strong></span>
-      <span>T3–5: <strong>4</strong></span>
-      <span>T6–10: <strong>8</strong></span>
-      <span>T11–20: <strong>15</strong></span>
-      <span>T21–30: <strong>22</strong></span>
-      <span>T31–40: <strong>30</strong></span>
-      <span>T41–50: <strong>38</strong></span>
+      <span>T3-5: <strong>4</strong></span>
+      <span>T6-10: <strong>8</strong></span>
+      <span>T11-20: <strong>15</strong></span>
+      <span>T21-30: <strong>22</strong></span>
+      <span>T31-40: <strong>30</strong></span>
+      <span>T41-50: <strong>38</strong></span>
       <span>50+: <strong>45</strong></span>
       <span>MC: <strong>50</strong></span>
       <span>WD: <strong>55</strong></span>
@@ -593,7 +656,6 @@ body {
   2026 Masters Pool &bull; For Bragging Rights (and Maybe Lunch) &bull; naturalForms
 </div>
 
-<!-- Confetti canvas -->
 <canvas class="confetti-canvas" id="confettiCanvas"></canvas>
 
 <script>
@@ -605,12 +667,9 @@ const DEADLINE = new Date('2026-04-09T12:00:00Z'); // 8 AM ET
 const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 const ESPN_GOLF_URL = 'https://site.api.espn.com/apis/site/v2/sports/golf/pga/leaderboard';
 
-// Position → Points mapping
-const POSITION_POINTS = {
-  1: 1, 2: 2, 3: 3
-};
+// Position scoring
 function getPointsForPosition(pos) {
-  if (pos <= 0) return 55; // WD or invalid
+  if (pos <= 0) return 55;
   if (pos === 1) return 1;
   if (pos === 2) return 2;
   if (pos === 3) return 3;
@@ -620,7 +679,7 @@ function getPointsForPosition(pos) {
   if (pos <= 30) return 22;
   if (pos <= 40) return 30;
   if (pos <= 50) return 38;
-  return 45; // 50+
+  return 45;
 }
 const MC_POINTS = 50;
 const WD_POINTS = 55;
@@ -630,20 +689,17 @@ const WD_POINTS = 55;
 // ============================================================
 let poolEntries = [];
 let tournamentData = null;
-let golferScores = {}; // name -> { position, posDisplay, scoreToPar, today, thru, status }
+let previousStandings = null;
 let isTournamentComplete = false;
 let refreshTimer = null;
+let autoScrollActive = false;
+let autoScrollTimer = null;
 
 // ============================================================
 // Normalize names for matching
 // ============================================================
 function normalizeName(name) {
-  return name
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z\s]/g, '')
-    .trim();
+  return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z\s]/g, '').trim();
 }
 
 // ============================================================
@@ -652,8 +708,7 @@ function normalizeName(name) {
 async function fetchPoolEntries() {
   try {
     const resp = await fetch(`${APPS_SCRIPT_URL}?action=getPicks`);
-    const data = await resp.json();
-    return data;
+    return await resp.json();
   } catch (err) {
     console.error('Failed to fetch pool entries:', err);
     return null;
@@ -668,7 +723,6 @@ async function fetchESPNData() {
     const resp = await fetch(ESPN_GOLF_URL);
     const data = await resp.json();
 
-    // Find the Masters event (or current active event)
     const events = data.events || [];
     let mastersEvent = null;
 
@@ -679,15 +733,9 @@ async function fetchESPNData() {
         break;
       }
     }
-
-    // If no Masters found, use the first event
-    if (!mastersEvent && events.length > 0) {
-      mastersEvent = events[0];
-    }
-
+    if (!mastersEvent && events.length > 0) mastersEvent = events[0];
     if (!mastersEvent) return null;
 
-    // Parse competitors
     const competition = mastersEvent.competitions?.[0];
     if (!competition) return null;
 
@@ -706,13 +754,11 @@ async function fetchESPNData() {
       let today = '--';
       let thru = '--';
 
-      // Position
       if (status.position) {
         posDisplay = status.position.displayName || status.displayValue || '--';
         posNum = parseInt(status.position.id) || 999;
       }
 
-      // Check for MC/WD/CUT
       const statusType = status.type?.name || '';
       if (statusType === 'STATUS_CUT' || comp.status?.period === 99) {
         playerStatus = 'MC';
@@ -723,37 +769,22 @@ async function fetchESPNData() {
         posDisplay = 'WD';
       }
 
-      // Score
-      if (comp.score) {
-        scoreToPar = comp.score.displayValue || '--';
-      }
+      if (comp.score) scoreToPar = comp.score.displayValue || '--';
 
-      // Today / Thru
       const linescores = comp.linescores || [];
       if (linescores.length > 0) {
         const currentRound = linescores[linescores.length - 1];
-        if (currentRound) {
-          today = currentRound.displayValue || '--';
-        }
+        if (currentRound) today = currentRound.displayValue || '--';
       }
       if (status.thru !== undefined && status.thru !== null) {
         thru = status.thru === 18 ? 'F' : status.thru.toString();
       }
 
-      scores[displayName] = {
-        position: posNum,
-        posDisplay,
-        scoreToPar,
-        today,
-        thru,
-        status: playerStatus
-      };
+      scores[displayName] = { position: posNum, posDisplay, scoreToPar, today, thru, status: playerStatus };
     }
 
-    // Determine if tournament is complete
     const eventStatus = mastersEvent.status?.type?.name || '';
-    const isComplete = eventStatus === 'STATUS_FINAL' ||
-      mastersEvent.status?.type?.completed === true;
+    const isComplete = eventStatus === 'STATUS_FINAL' || mastersEvent.status?.type?.completed === true;
 
     return {
       name: mastersEvent.name || 'Masters Tournament',
@@ -770,27 +801,36 @@ async function fetchESPNData() {
 }
 
 // ============================================================
-// Match a pool golfer name to ESPN data
+// Match golfer name to ESPN data
 // ============================================================
 function findGolferScore(golferName) {
   if (!tournamentData || !tournamentData.scores) return null;
 
   const normalized = normalizeName(golferName);
 
-  // Direct match first
   for (const [espnName, data] of Object.entries(tournamentData.scores)) {
     if (normalizeName(espnName) === normalized) return data;
   }
 
-  // Partial match (last name)
+  // Last name match
   const lastName = normalized.split(' ').pop();
   for (const [espnName, data] of Object.entries(tournamentData.scores)) {
-    const espnLast = normalizeName(espnName).split(' ').pop();
-    if (espnLast === lastName) return data;
+    if (normalizeName(espnName).split(' ').pop() === lastName) return data;
   }
 
-  // No match — treat as not in field
   return null;
+}
+
+// ============================================================
+// Determine tier from picks
+// ============================================================
+function getTier(entry, name) {
+  if (entry.picks.tier1.includes(name)) return 1;
+  if (entry.picks.tier2.includes(name)) return 2;
+  if (entry.picks.tier3.includes(name)) return 3;
+  if (entry.picks.tier4.includes(name)) return 4;
+  if (entry.picks.tier5.includes(name)) return 5;
+  return 0;
 }
 
 // ============================================================
@@ -808,18 +848,11 @@ function calculateStandings(entries) {
 
     const golferDetails = allPicks.map(name => {
       const score = findGolferScore(name);
+      const tier = getTier(entry, name);
       let points;
-      let tier = 0;
-
-      // Determine tier
-      if (entry.picks.tier1.includes(name)) tier = 1;
-      else if (entry.picks.tier2.includes(name)) tier = 2;
-      else if (entry.picks.tier3.includes(name)) tier = 3;
-      else if (entry.picks.tier4.includes(name)) tier = 4;
-      else if (entry.picks.tier5.includes(name)) tier = 5;
 
       if (!score) {
-        points = WD_POINTS; // Not in field
+        points = WD_POINTS;
         return { name, tier, points, posDisplay: 'N/A', scoreToPar: '--', today: '--', thru: '--', status: 'unknown' };
       }
 
@@ -827,38 +860,20 @@ function calculateStandings(entries) {
       else if (score.status === 'WD') points = WD_POINTS;
       else points = getPointsForPosition(score.position);
 
-      return {
-        name, tier, points,
-        posDisplay: score.posDisplay,
-        scoreToPar: score.scoreToPar,
-        today: score.today,
-        thru: score.thru,
-        status: score.status
-      };
+      return { name, tier, points, posDisplay: score.posDisplay, scoreToPar: score.scoreToPar, today: score.today, thru: score.thru, status: score.status };
     });
 
-    // Sort by points (ascending) to find best 4
     const sorted = [...golferDetails].sort((a, b) => a.points - b.points);
     const countingIndices = new Set(sorted.slice(0, 4).map(g => golferDetails.indexOf(g)));
-
-    golferDetails.forEach((g, i) => {
-      g.counting = countingIndices.has(i);
-    });
+    golferDetails.forEach((g, i) => { g.counting = countingIndices.has(i); });
 
     const totalPoints = sorted.slice(0, 4).reduce((sum, g) => sum + g.points, 0);
 
-    return {
-      name: entry.name,
-      totalPoints,
-      golfers: golferDetails,
-      tiebreakers: entry.tiebreakers || {}
-    };
+    return { name: entry.name, totalPoints, golfers: golferDetails, tiebreakers: entry.tiebreakers || {} };
   });
 
-  // Sort by total points (ascending = better)
   standings.sort((a, b) => a.totalPoints - b.totalPoints);
 
-  // Assign ranks (handle ties)
   let rank = 1;
   standings.forEach((s, i) => {
     if (i > 0 && s.totalPoints === standings[i - 1].totalPoints) {
@@ -878,21 +893,19 @@ function calculateStandings(entries) {
 function renderPreTournament(poolData) {
   document.getElementById('preTournament').style.display = 'block';
   document.getElementById('leaderboardContainer').style.display = 'none';
+  document.getElementById('statsBar').style.display = 'none';
 
-  // Countdown
   const now = new Date();
   const diff = DEADLINE - now;
   if (diff > 0) {
     const days = Math.floor(diff / 86400000);
     const hrs = Math.floor((diff % 86400000) / 3600000);
     const mins = Math.floor((diff % 3600000) / 60000);
-    document.getElementById('countdown').textContent =
-      `${days}d ${hrs}h ${mins}m until tee-off`;
+    document.getElementById('countdown').textContent = `${days}d ${hrs}h ${mins}m until tee-off`;
   } else {
     document.getElementById('countdown').textContent = 'Starting soon...';
   }
 
-  // Entry list
   const list = document.getElementById('entriesList');
   list.innerHTML = '';
   if (poolData && poolData.entries) {
@@ -901,8 +914,7 @@ function renderPreTournament(poolData) {
       li.innerHTML = `<span class="entry-check">&#10003;</span> ${e.name}`;
       list.appendChild(li);
     });
-    document.getElementById('statusEntries').innerHTML =
-      `<strong>${poolData.entries.length}</strong> entries`;
+    document.getElementById('statusEntries').innerHTML = `<strong>${poolData.entries.length}</strong> entries`;
   }
 }
 
@@ -913,13 +925,28 @@ function renderLeaderboard(standings) {
   const container = document.getElementById('leaderboardCards');
   container.innerHTML = '';
 
-  standings.forEach(entry => {
+  standings.forEach((entry, idx) => {
     const card = document.createElement('div');
     card.className = `leaderboard-card${entry.rank <= 3 ? ' rank-' + entry.rank : ''}`;
 
     const rankClass = entry.rank <= 3 ? '' : ' default';
 
-    // Sort golfers: counting first (sorted by points), then non-counting
+    // Movement indicator
+    let movementHtml = '';
+    if (previousStandings) {
+      const prev = previousStandings.find(p => p.name === entry.name);
+      if (prev) {
+        if (prev.rank > entry.rank) movementHtml = `<span class="movement-arrow up">&#9650; ${prev.rank - entry.rank}</span>`;
+        else if (prev.rank < entry.rank) movementHtml = `<span class="movement-arrow down">&#9660; ${entry.rank - prev.rank}</span>`;
+        else movementHtml = `<span class="movement-arrow same">&#9644;</span>`;
+      }
+    }
+
+    // Best golfer subtitle
+    const bestGolfer = entry.golfers.filter(g => g.counting).sort((a, b) => a.points - b.points)[0];
+    const bestText = bestGolfer ? `Best: ${bestGolfer.name} (${bestGolfer.posDisplay})` : '';
+
+    // Sort: counting first by points, then non-counting
     const counting = entry.golfers.filter(g => g.counting).sort((a, b) => a.points - b.points);
     const notCounting = entry.golfers.filter(g => !g.counting).sort((a, b) => a.points - b.points);
     const orderedGolfers = [...counting, ...notCounting];
@@ -927,7 +954,10 @@ function renderLeaderboard(standings) {
     card.innerHTML = `
       <div class="card-header" onclick="toggleCard(this)">
         <div class="rank-badge${rankClass}">${entry.rank}</div>
-        <div class="card-name">${entry.name}</div>
+        <div class="card-name-area">
+          <div class="card-name">${entry.name} ${movementHtml}</div>
+          <div class="card-subtitle">${bestText}</div>
+        </div>
         <div class="card-score">
           <div class="total">${entry.totalPoints}</div>
           <div class="label">points</div>
@@ -935,21 +965,19 @@ function renderLeaderboard(standings) {
         <div class="expand-icon">&#9660;</div>
       </div>
       <div class="card-body">
-        <div class="golfer-grid" style="grid-template-columns: 1fr;">
-          ${orderedGolfers.map(g => `
-            <div class="golfer-row ${g.counting ? 'counting' : 'not-counting'}">
-              <div class="golfer-tier-dot t${g.tier}"></div>
-              <div class="golfer-name">${g.name}</div>
-              <div class="golfer-position ${g.status === 'MC' ? 'golfer-mc' : g.status === 'WD' ? 'golfer-wd' : ''}">${g.posDisplay}</div>
-              <div class="golfer-score-today">${g.status === 'MC' || g.status === 'WD' ? '' : g.scoreToPar !== '--' ? g.scoreToPar : ''} ${g.thru !== '--' && g.status === 'active' ? '(thru ' + g.thru + ')' : ''}</div>
-              <div class="golfer-pts ${g.counting ? 'counting-pts' : 'not-counting-pts'}">${g.points} pts</div>
-            </div>
-          `).join('')}
-        </div>
-        ${entry.tiebreakers ? `
+        ${orderedGolfers.map(g => `
+          <div class="golfer-row ${g.counting ? 'counting' : 'not-counting'}">
+            <div class="golfer-tier-dot t${g.tier}"></div>
+            <div class="golfer-name">${g.name}</div>
+            <div class="golfer-position ${g.status === 'MC' ? 'golfer-mc' : g.status === 'WD' ? 'golfer-wd' : ''}">${g.posDisplay}</div>
+            <div class="golfer-score-detail">${g.status === 'MC' || g.status === 'WD' || g.status === 'unknown' ? '' : g.scoreToPar !== '--' ? g.scoreToPar + (g.thru !== '--' && g.thru !== 'F' ? ' (thru ' + g.thru + ')' : g.thru === 'F' ? ' (F)' : '') : ''}</div>
+            <div class="golfer-pts ${g.counting ? 'counting-pts' : 'not-counting-pts'}">${g.points} pts</div>
+          </div>
+        `).join('')}
+        ${entry.tiebreakers && (entry.tiebreakers.score || entry.tiebreakers.playoff || entry.tiebreakers.leader) ? `
           <div class="card-tiebreakers">
             <strong>Tiebreakers:</strong>
-            ${entry.tiebreakers.score ? 'Winning score: ' + entry.tiebreakers.score : ''}
+            ${entry.tiebreakers.score ? ' Score: ' + entry.tiebreakers.score : ''}
             ${entry.tiebreakers.playoff ? ' &bull; Playoff: ' + entry.tiebreakers.playoff : ''}
             ${entry.tiebreakers.leader ? ' &bull; Sat. leader: ' + entry.tiebreakers.leader : ''}
           </div>
@@ -960,15 +988,117 @@ function renderLeaderboard(standings) {
     container.appendChild(card);
   });
 
-  // Auto-expand the top entry
+  // Auto-expand first card
   const firstCard = container.querySelector('.leaderboard-card');
   if (firstCard) firstCard.classList.add('expanded');
+}
+
+function renderStats(standings) {
+  if (!standings.length || !tournamentData) {
+    document.getElementById('statsBar').style.display = 'none';
+    return;
+  }
+
+  const statsBar = document.getElementById('statsBar');
+  statsBar.style.display = 'grid';
+
+  // Find stats
+  const leader = standings[0];
+  const lastPlace = standings[standings.length - 1];
+  const gap = lastPlace.totalPoints - leader.totalPoints;
+
+  // Best single golfer pick
+  let bestPick = { name: '--', pts: 999, owner: '' };
+  standings.forEach(s => {
+    s.golfers.forEach(g => {
+      if (g.points < bestPick.pts) {
+        bestPick = { name: g.name, pts: g.points, owner: s.name, pos: g.posDisplay };
+      }
+    });
+  });
+
+  // Most common pick
+  const pickCounts = {};
+  standings.forEach(s => s.golfers.forEach(g => { pickCounts[g.name] = (pickCounts[g.name] || 0) + 1; }));
+  const mostPopular = Object.entries(pickCounts).sort((a, b) => b[1] - a[1])[0];
+
+  statsBar.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Leader</div>
+      <div class="stat-value">${leader.name}</div>
+      <div class="stat-detail">${leader.totalPoints} pts</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Gap to Last</div>
+      <div class="stat-value">${gap}</div>
+      <div class="stat-detail">pts separating field</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Best Pick</div>
+      <div class="stat-value">${bestPick.name}</div>
+      <div class="stat-detail">${bestPick.pos} (${bestPick.pts} pts) — ${bestPick.owner}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Most Popular</div>
+      <div class="stat-value">${mostPopular ? mostPopular[0] : '--'}</div>
+      <div class="stat-detail">${mostPopular ? mostPopular[1] + ' picks' : ''}</div>
+    </div>
+  `;
 }
 
 function toggleCard(headerEl) {
   headerEl.parentElement.classList.toggle('expanded');
 }
 
+function expandAll() {
+  document.querySelectorAll('.leaderboard-card').forEach(c => c.classList.add('expanded'));
+}
+function collapseAll() {
+  document.querySelectorAll('.leaderboard-card').forEach(c => c.classList.remove('expanded'));
+}
+
+// ============================================================
+// Auto-scroll (TV mode)
+// ============================================================
+function toggleAutoScroll() {
+  autoScrollActive = !autoScrollActive;
+  const btn = document.getElementById('btnAutoScroll');
+  const indicator = document.getElementById('scrollIndicator');
+
+  if (autoScrollActive) {
+    btn.classList.add('active');
+    btn.innerHTML = '<span class="icon">&#9632;</span> Stop Scroll';
+    indicator.classList.add('visible');
+    expandAll();
+    startAutoScroll();
+  } else {
+    btn.classList.remove('active');
+    btn.innerHTML = '<span class="icon">&#9654;</span> TV Auto-Scroll';
+    indicator.classList.remove('visible');
+    clearInterval(autoScrollTimer);
+  }
+}
+
+function startAutoScroll() {
+  let scrollDown = true;
+  autoScrollTimer = setInterval(() => {
+    if (!autoScrollActive) return;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const current = window.scrollY;
+
+    if (scrollDown) {
+      window.scrollBy({ top: 1, behavior: 'auto' });
+      if (current >= maxScroll - 5) scrollDown = false;
+    } else {
+      window.scrollBy({ top: -1, behavior: 'auto' });
+      if (current <= 5) scrollDown = true;
+    }
+  }, 30);
+}
+
+// ============================================================
+// Champion + Confetti
+// ============================================================
 function showChampion(standings) {
   if (!standings.length) return;
   const winner = standings[0];
@@ -978,30 +1108,6 @@ function showChampion(standings) {
   launchConfetti();
 }
 
-function updateStatus(tournData) {
-  const now = new Date();
-  const statusEl = document.getElementById('statusTournament');
-  const refreshEl = document.getElementById('statusRefresh');
-
-  if (tournData) {
-    let statusText = tournData.name;
-    if (tournData.isComplete) {
-      statusText += ' — <strong>Final</strong>';
-    } else if (tournData.round) {
-      statusText += ` — Round ${tournData.round}`;
-      if (tournData.statusDisplay) {
-        statusText += ` (${tournData.statusDisplay})`;
-      }
-    }
-    statusEl.innerHTML = `<span class="status-live"><span class="pulse"></span> LIVE</span> &nbsp; ${statusText}`;
-  }
-
-  refreshEl.innerHTML = `Last updated: <strong>${now.toLocaleTimeString()}</strong>`;
-}
-
-// ============================================================
-// Confetti
-// ============================================================
 function launchConfetti() {
   const canvas = document.getElementById('confettiCanvas');
   const ctx = canvas.getContext('2d');
@@ -1011,17 +1117,17 @@ function launchConfetti() {
   const colors = ['#C8A951', '#006747', '#E8D48B', '#FFFFFF', '#004D35', '#FFD700'];
   const particles = [];
 
-  for (let i = 0; i < 150; i++) {
+  for (let i = 0; i < 200; i++) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height - canvas.height,
-      w: Math.random() * 8 + 4,
+      w: Math.random() * 10 + 4,
       h: Math.random() * 6 + 2,
       color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 3,
+      vx: (Math.random() - 0.5) * 4,
       vy: Math.random() * 3 + 2,
       rot: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 10,
+      rotSpeed: (Math.random() - 0.5) * 12,
       opacity: 1
     });
   }
@@ -1034,13 +1140,11 @@ function launchConfetti() {
     particles.forEach(p => {
       if (p.opacity <= 0) return;
       alive = true;
-
       p.x += p.vx;
       p.y += p.vy;
       p.rot += p.rotSpeed;
-      p.vy += 0.05;
-
-      if (frame > 120) p.opacity -= 0.008;
+      p.vy += 0.04;
+      if (frame > 150) p.opacity -= 0.006;
 
       ctx.save();
       ctx.translate(p.x, p.y);
@@ -1052,14 +1156,32 @@ function launchConfetti() {
     });
 
     frame++;
-    if (alive && frame < 400) {
-      requestAnimationFrame(animate);
-    } else {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (alive && frame < 500) requestAnimationFrame(animate);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+// ============================================================
+// Status updates
+// ============================================================
+function updateStatus(tournData) {
+  const now = new Date();
+  const statusEl = document.getElementById('statusTournament');
+  const refreshEl = document.getElementById('statusRefresh');
+
+  if (tournData) {
+    let statusText = tournData.name;
+    if (tournData.isComplete) {
+      statusText += ' — <strong>Final</strong>';
+    } else if (tournData.round) {
+      statusText += ` — Round ${tournData.round}`;
+      if (tournData.statusDisplay) statusText += ` (${tournData.statusDisplay})`;
     }
+    statusEl.innerHTML = `<span class="status-live"><span class="pulse"></span> LIVE</span> &nbsp; ${statusText}`;
   }
 
-  animate();
+  refreshEl.innerHTML = `Last updated: <strong>${now.toLocaleTimeString()}</strong>`;
 }
 
 // ============================================================
@@ -1069,33 +1191,30 @@ async function refresh() {
   const now = new Date();
   const isLocked = now >= DEADLINE;
 
-  // Fetch pool data
   const poolData = await fetchPoolEntries();
 
   if (!isLocked) {
-    // Before tournament: show waiting screen
     renderPreTournament(poolData);
     return;
   }
 
-  // After deadline: fetch live scores
   tournamentData = await fetchESPNData();
   updateStatus(tournamentData);
 
   if (poolData && poolData.entries && poolData.isLocked) {
     const standings = calculateStandings(poolData.entries);
     renderLeaderboard(standings);
+    renderStats(standings);
 
-    document.getElementById('statusEntries').innerHTML =
-      `<strong>${poolData.entries.length}</strong> entries`;
+    document.getElementById('statusEntries').innerHTML = `<strong>${poolData.entries.length}</strong> entries`;
 
-    // Check if tournament is complete
     if (tournamentData && tournamentData.isComplete && !isTournamentComplete) {
       isTournamentComplete = true;
       showChampion(standings);
     }
+
+    previousStandings = standings;
   } else {
-    // Fallback: show pre-tournament
     renderPreTournament(poolData);
   }
 }
@@ -1105,8 +1224,6 @@ async function refresh() {
 // ============================================================
 async function init() {
   await refresh();
-
-  // Auto-refresh every 5 minutes
   refreshTimer = setInterval(refresh, REFRESH_INTERVAL);
 }
 
