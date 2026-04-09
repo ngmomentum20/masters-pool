@@ -606,7 +606,9 @@ async function fetchESPNData() {
       if (c.score) scoreToPar = c.score.displayValue || '--';
 
       const ls = c.linescores || [];
-      if (ls.length > 0 && ls[ls.length - 1]) today = ls[ls.length - 1].displayValue || '--';
+      const curPeriod = status.period || 1;
+      const curRound = ls.find(l => l.period === curPeriod && l.displayValue);
+      if (curRound) today = curRound.displayValue;
       if (status.thru !== undefined && status.thru !== null) thru = status.thru === 18 ? 'F' : String(status.thru);
 
       competitors.push({
@@ -626,7 +628,7 @@ async function fetchESPNData() {
     const eventStatus = ev.status?.type?.name || '';
     return {
       name: ev.name || 'Masters Tournament',
-      round: ev.status?.period || 0,
+      round: ev.status?.period || Math.max(...(comp.competitors || []).map(c => c.status?.period || 0), 0) || 1,
       isComplete: eventStatus === 'STATUS_FINAL' || ev.status?.type?.completed === true,
       statusDisplay: ev.status?.type?.shortDetail || '',
       competitors

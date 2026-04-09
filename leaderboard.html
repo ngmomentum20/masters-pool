@@ -799,10 +799,9 @@ async function fetchESPNData() {
       if (comp.score) scoreToPar = comp.score.displayValue || '--';
 
       const linescores = comp.linescores || [];
-      if (linescores.length > 0) {
-        const currentRound = linescores[linescores.length - 1];
-        if (currentRound) today = currentRound.displayValue || '--';
-      }
+      const currentPeriod = status.period || 1;
+      const currentRoundScore = linescores.find(ls => ls.period === currentPeriod && ls.displayValue);
+      if (currentRoundScore) today = currentRoundScore.displayValue;
       if (status.thru !== undefined && status.thru !== null) {
         thru = status.thru === 18 ? 'F' : status.thru.toString();
       }
@@ -815,7 +814,7 @@ async function fetchESPNData() {
 
     return {
       name: mastersEvent.name || 'Masters Tournament',
-      round: mastersEvent.status?.period || 0,
+      round: mastersEvent.status?.period || Math.max(...competitors.map(c => c.status?.period || 0), 0) || 1,
       status: eventStatus,
       isComplete,
       scores,
