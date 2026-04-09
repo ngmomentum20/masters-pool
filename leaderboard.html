@@ -35,10 +35,17 @@ body {
   min-height: 100vh;
 }
 
+/* ========== STICKY TOP ========== */
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
 /* ========== HEADER ========== */
 .header {
   background: linear-gradient(170deg, var(--masters-darkest) 0%, var(--masters-deeper) 40%, var(--masters-dark) 100%);
-  padding: 1.75rem 2rem 1.5rem;
+  padding: 1.25rem 2rem 1rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -422,22 +429,28 @@ body {
 }
 .leaderboard-card.expanded .card-body { display: block; }
 
+.golfer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .golfer-row {
   display: flex;
   align-items: center;
-  padding: 0.55rem 1.25rem;
-  gap: 0.6rem;
+  padding: 0.4rem 1rem;
+  gap: 0.4rem;
   border-bottom: 1px solid #F0F4EC;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   transition: background 0.15s;
 }
-.golfer-row:last-child { border-bottom: none; }
 .golfer-row:hover { background: #FAFDF7; }
 .golfer-row.counting { background: #F0F8EC; font-weight: 600; }
 .golfer-row.not-counting { opacity: 0.45; }
+/* Right column rows get a left border for visual separation */
+.golfer-row:nth-child(even) { border-left: 1px solid #F0F4EC; }
 
 .golfer-tier-dot {
-  width: 8px; height: 8px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -447,23 +460,32 @@ body {
 .golfer-tier-dot.t4 { background: #D4915E; }
 .golfer-tier-dot.t5 { background: #9B8EC0; }
 
-.golfer-name { flex: 1; min-width: 0; }
+.golfer-name {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .golfer-position {
   font-weight: 700;
   color: var(--masters-dark);
-  min-width: 36px;
+  min-width: 30px;
   text-align: center;
+  font-size: 0.75rem;
 }
 .golfer-score-detail {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-light);
-  min-width: 80px;
+  min-width: 60px;
   text-align: right;
+  white-space: nowrap;
 }
 .golfer-pts {
   font-weight: 700;
-  min-width: 45px;
+  min-width: 35px;
   text-align: right;
+  font-size: 0.75rem;
 }
 .golfer-pts.counting-pts { color: var(--masters-green); }
 .golfer-pts.not-counting-pts { color: #B0B0B0; }
@@ -556,46 +578,51 @@ body {
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
-  .header h1 { font-size: 1.8rem; }
+  .header h1 { font-size: 1.6rem; }
   .leaderboard-container { padding: 0.75rem; }
   .status-bar { gap: 0.75rem; padding: 0.5rem 1rem; }
   .champion-name { font-size: 1.6rem; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 0 0.75rem; }
   .golfer-score-detail { display: none; }
+  .golfer-grid { grid-template-columns: 1fr; }
+  .golfer-row:nth-child(even) { border-left: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<div class="header">
-  <div class="header-content">
-    <h1>The Masters Pool</h1>
-    <div class="subtitle">Leaderboard</div>
-    <div class="event-badge">
-      <span>Augusta National</span>
-      <span>&bull;</span>
-      <span>April 9 – 12, 2026</span>
-    </div>
-    <div class="header-nav">
-      <a href="index.html" class="nav-link">&larr; Make Picks</a>
-      <button class="nav-link" onclick="refresh()" style="background:none; cursor:pointer;">Refresh Scores</button>
+<!-- Sticky Header Block -->
+<div class="sticky-top">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <h1>The Masters Pool</h1>
+      <div class="subtitle">Leaderboard</div>
+      <div class="event-badge">
+        <span>Augusta National</span>
+        <span>&bull;</span>
+        <span>April 9 – 12, 2026</span>
+      </div>
+      <div class="header-nav">
+        <a href="index.html" class="nav-link">&larr; Make Picks</a>
+        <button class="nav-link" onclick="refresh()" style="background:none; cursor:pointer;">Refresh Scores</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Status Bar -->
-<div class="status-bar" id="statusBar">
-  <div class="status-item" id="statusTournament">Loading tournament data...</div>
-  <div class="status-item" id="statusRefresh"></div>
-  <div class="status-item" id="statusEntries"></div>
-</div>
+  <!-- Status Bar -->
+  <div class="status-bar" id="statusBar">
+    <div class="status-item" id="statusTournament">Loading tournament data...</div>
+    <div class="status-item" id="statusRefresh"></div>
+    <div class="status-item" id="statusEntries"></div>
+  </div>
 
-<!-- TV Mode Controls -->
-<div class="tv-bar">
-  <button class="tv-btn" onclick="toggleAutoScroll()" id="btnAutoScroll"><span class="icon">&#9654;</span> TV Auto-Scroll</button>
-  <button class="tv-btn" onclick="expandAll()"><span class="icon">&#9776;</span> Expand All</button>
-  <button class="tv-btn" onclick="collapseAll()"><span class="icon">&#8212;</span> Collapse All</button>
+  <!-- TV Mode Controls -->
+  <div class="tv-bar">
+    <button class="tv-btn" onclick="toggleAutoScroll()" id="btnAutoScroll"><span class="icon">&#9654;</span> TV Auto-Scroll</button>
+    <button class="tv-btn" onclick="expandAll()"><span class="icon">&#9776;</span> Expand All</button>
+    <button class="tv-btn" onclick="collapseAll()"><span class="icon">&#8212;</span> Collapse All</button>
+  </div>
 </div>
 
 <div class="auto-scroll-indicator" id="scrollIndicator">AUTO-SCROLL ON</div>
@@ -965,15 +992,17 @@ function renderLeaderboard(standings) {
         <div class="expand-icon">&#9660;</div>
       </div>
       <div class="card-body">
+        <div class="golfer-grid">
         ${orderedGolfers.map(g => `
           <div class="golfer-row ${g.counting ? 'counting' : 'not-counting'}">
             <div class="golfer-tier-dot t${g.tier}"></div>
             <div class="golfer-name">${g.name}</div>
             <div class="golfer-position ${g.status === 'MC' ? 'golfer-mc' : g.status === 'WD' ? 'golfer-wd' : ''}">${g.posDisplay}</div>
             <div class="golfer-score-detail">${g.status === 'MC' || g.status === 'WD' || g.status === 'unknown' ? '' : g.scoreToPar !== '--' ? g.scoreToPar + (g.thru !== '--' && g.thru !== 'F' ? ' (thru ' + g.thru + ')' : g.thru === 'F' ? ' (F)' : '') : ''}</div>
-            <div class="golfer-pts ${g.counting ? 'counting-pts' : 'not-counting-pts'}">${g.points} pts</div>
+            <div class="golfer-pts ${g.counting ? 'counting-pts' : 'not-counting-pts'}">${g.points}</div>
           </div>
         `).join('')}
+        </div>
         ${entry.tiebreakers && (entry.tiebreakers.score || entry.tiebreakers.playoff || entry.tiebreakers.leader) ? `
           <div class="card-tiebreakers">
             <strong>Tiebreakers:</strong>
@@ -1080,18 +1109,29 @@ function toggleAutoScroll() {
 }
 
 function startAutoScroll() {
-  let scrollDown = true;
+  let pauseFrames = 0;
   autoScrollTimer = setInterval(() => {
     if (!autoScrollActive) return;
+
+    // Pause at the bottom before looping back to top
+    if (pauseFrames > 0) {
+      pauseFrames--;
+      return;
+    }
+
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const current = window.scrollY;
 
-    if (scrollDown) {
-      window.scrollBy({ top: 1, behavior: 'auto' });
-      if (current >= maxScroll - 5) scrollDown = false;
+    if (current >= maxScroll - 5) {
+      // Reached bottom — pause 3 seconds then jump to top
+      pauseFrames = 100; // 100 frames * 30ms = 3 seconds
+      setTimeout(() => {
+        if (autoScrollActive) {
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+      }, 3000);
     } else {
-      window.scrollBy({ top: -1, behavior: 'auto' });
-      if (current <= 5) scrollDown = true;
+      window.scrollBy({ top: 1, behavior: 'auto' });
     }
   }, 30);
 }
