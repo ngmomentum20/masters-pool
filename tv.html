@@ -603,12 +603,27 @@ async function fetchESPNData() {
       if (st === 'STATUS_CUT' || status.period === 99) { playerStatus = 'MC'; posDisplay = 'MC'; }
       if (st === 'STATUS_WITHDRAWN' || st === 'STATUS_DISQUALIFIED') { playerStatus = 'WD'; posDisplay = 'WD'; }
 
+      // Total score to par — score.displayValue can lag mid-round, so prefer linescores
       if (c.score) scoreToPar = c.score.displayValue || '--';
 
       const ls = c.linescores || [];
       const curPeriod = status.period || 1;
       const curRound = ls.find(l => l.period === curPeriod && l.displayValue);
-      if (curRound) today = curRound.displayValue;
+
+      // Fix total: in round 1, linescore IS the tournament total (more reliable mid-round)
+      if (curRound && curPeriod === 1) {
+        scoreToPar = curRound.displayValue;
+      }
+
+      // Today: show stroke total (67, 72) when round finished, relative-to-par (-3, E) when in progress
+      if (curRound) {
+        if (status.thru === 18) {
+          today = curRound.value ? String(curRound.value) : curRound.displayValue;
+        } else if (status.thru > 0) {
+          today = curRound.displayValue;
+        }
+      }
+
       if (status.thru !== undefined && status.thru !== null) thru = status.thru === 18 ? 'F' : String(status.thru);
 
       competitors.push({
